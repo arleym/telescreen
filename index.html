@@ -10,17 +10,20 @@
       margin: 0;
       display: flex;
     }
-    .hide {
-      display: none;
-    }
+    .hide { display: none; }
     video {
       max-width: 100%;
       height: 100vh;
+      margin: auto;
     }
       /*video::-webkit-media-controls-panel {
           display: flex !important;
           opacity: 1 !important;
       }*/
+      video::-webkit-media-controls-panel { background-color: #161618; }
+      video::-webkit-media-controls-volume-slider-container { background-color: cyan; }
+      video::-webkit-media-controls-volume-slider { background-color: #1FB2B0; }
+      video::-webkit-media-controls-timeline { background-color: #1FB2B0; }
     .w-controls {
       position: fixed;
       width: 100%;
@@ -43,12 +46,8 @@
         text-indent: -4px;
         flex: 2;
       }
-        .controls button:focus {
-          background-color: #bbb;
-        }
-      .control__spacer {
-        flex: .2;
-      }
+        .controls button:focus { background-color: #bbb; }
+      .control__spacer { flex: .2; }
       [id="videoFile"] {
         font-size: 1em;
         padding: 6px 10px;
@@ -89,7 +88,7 @@
       <span class="control__spacer"></span>
 
       <input type="text" id="videoFile" value="file:///Users/arleym/Google%20Drive/Learn/React%20For%20Beginners/01%20-%20Introduction,%20Tooling%20and%20Editor%20Setup.mp4">
-      <button id="loadVideo"  autofocus style="margin-left:0">🔍</button>
+      <button id="loadVideo" autofocus style="margin-left:0">🔍</button>
       <span class="control__spacer"></span>
 
       <button id="hidecontrols">❎</button>
@@ -224,15 +223,15 @@
           // playback speed buttons
           document.getElementById("slower").addEventListener("click", function () {
               video.playbackRate -= 0.1;
-              document.getElementById('playbackrate').value = video.playbackRate;
+              document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
           }, false);
           document.getElementById("faster").addEventListener("click", function () {
               video.playbackRate += 0.1;
-              document.getElementById('playbackrate').value = video.playbackRate;
+              document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
           }, false);
           document.getElementById("normal").addEventListener("click", function () {
               video.playbackRate = 1;
-              document.getElementById('playbackrate').value = video.playbackRate;
+              document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
           }, false);
           document.getElementById("mute").addEventListener("click", function (evt) {
               if (video.muted) {
@@ -278,18 +277,23 @@
     c.init();r.Mousetrap=c;"undefined"!==typeof module&&module.exports&&(module.exports=c);"function"===typeof define&&define.amd&&define(function(){return c})}})("undefined"!==typeof window?window:null,"undefined"!==typeof window?document:null);
 
     // hide tools
-    Mousetrap.bind('esc', function() {
-      $('#w-controls').toggleClass('hide');
-    });
+    Mousetrap.bind('esc', function() { $('#w-controls').toggleClass('hide'); });
     // play pause
-    Mousetrap.bind('space', function() {
-      $('#videoplayer').get(0).paused?$('#videoplayer').get(0).play() :$('#videoplayer').get(0).pause();
-    });
+    Mousetrap.bind('space', function() { $('#videoplayer').get(0).paused?$('#videoplayer').get(0).play() :$('#videoplayer').get(0).pause(); });
+    // speed controls
+    Mousetrap.bind('d', function() { $('#faster').click(); });
+    Mousetrap.bind('s', function() { $('#slower').click(); });
+    Mousetrap.bind('r', function() { $('#normal').click(); });
   </script>
 </body>
 </html>
 <!--
+- start video by URL query string
+- Index listy area!
+  - use terminal to list a bunch of file names, have a link of files that open in media player...
+- SVG icons
 - Add button title tags
+- fade out at time
 - Line by line JS
   - remove error
   - remove volume
