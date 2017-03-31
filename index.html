@@ -10,7 +10,15 @@
       margin: 0;
       display: flex;
     }
+    @font-face {
+      /*http://pictos.cc/classic/font*/
+      font-family: "pictos";
+      src: url("pictos-web.woff");
+    }
+    .pictos { font-family: "pictos"; }
     .hide { display: none; }
+    .milli { font-size: .9em !important; }
+    .flex1 { flex: 1; }
     video {
       max-width: 100%;
       height: 100vh;
@@ -30,7 +38,7 @@
       bottom: 0;
       padding: 10px;
       background-color: black;
-      height: 5vh;
+      height: 6vh;
     }
     .controls {
       display: flex;
@@ -39,12 +47,10 @@
       .controls button {
         border: 1px solid #bbb;
         background: #ddd;
-        height: 2em;
-        width: 4em;
-        line-height: 1;
         font-size: 1em;
-        text-indent: -4px;
         flex: 2;
+        padding: 0;
+        line-height: 0;
       }
         .controls button:focus { background-color: #bbb; }
       .control__spacer { flex: .2; }
@@ -58,6 +64,10 @@
         min-width: 300px;
         flex: 3;
       }
+      [type="file"] {
+        background-color: rgba(255,255,255,0.5);
+        padding: 7px;
+      }
   </style>
 </head>
 <body onload="init();" >
@@ -70,28 +80,30 @@
       <label id="w-file">
         <input type="file" name="files[]" id="file" accept="image/*,video/*,audio/*" class="box__file" data-multiple-caption="{count} files selected">
       </label>
-      <button id="restart">⏮</button>
-      <button id="rew">⏪</button>
-      <button id="play">⏯</button>
-      <button id="fwd">⏩</button>
+      <button class="pictos" id="restart">0</button>
+      <button class="pictos" id="rew">8</button>
+      <button class="pictos" id="play">9</button>
+      <button class="pictos" id="fwd">7</button>
       <span class="control__spacer"></span>
 
-      <button id="normal" title="reset speed (r)">⤵</button>
-      <button id="slower">⏬</button>
-      <button id="faster">⏫</button>
-      <input id="playbackrate" disabled="disabled"></input>
+      <button class="pictos" id="normal" title="reset speed (r)">D</button>
+      <button class="pictos" id="slower">-</button>
+      <button class="pictos" id="faster">+</button>
+      <input class="flex1" id="playbackrate" disabled="disabled"></input>
       <span class="control__spacer"></span>
 
-      <button id="mute">🔇</button>
-      <button id="volDn">🔉</button>
-      <button id="volUp">🔊</button>
+      <button class="pictos" id="mute"><</button>
+      <button class="pictos milli" id="volDn">></button>
+      <button class="pictos" id="volUp">></button>
       <span class="control__spacer"></span>
 
       <input type="text" id="videoFile" value="file:///Users/arleym/Google%20Drive/Learn/React%20For%20Beginners/01%20-%20Introduction,%20Tooling%20and%20Editor%20Setup.mp4">
-      <button id="loadVideo" autofocus style="margin-left:0">🔍</button>
+      <button class="pictos" id="loadVideo" autofocus style="margin-left:0">s</button>
       <span class="control__spacer"></span>
 
-      <button id="hidecontrols">❎</button>
+      <button class="pictos" id="hidecontrols">*</button>
+      <!-- <button class="pictos" id="hidecontrols">.</button> -->
+      <button class="pictos" id="list">n</button>
     </div>
   </div>
 
@@ -137,10 +149,10 @@
         button = evt.target; //  get the button id to swap the text based on the state
         if (video.paused) {   // play the file, and display pause symbol
           video.play();
-          button.textContent = "⏸";
+          button.textContent = "5";
         } else { // pause the file, and display play symbol
           video.pause();
-          button.textContent = "▶";
+          button.textContent = "4";
         }
       }
       //  load video file from input field
