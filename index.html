@@ -69,6 +69,7 @@
       .button {
         /* http://codepen.io/LukyVj/pen/EIFlv?editors=1100#0 */
         position: relative;
+        text-decoration: none;
         background-image: linear-gradient(#485258, #30383c);
         color: #eceff1;
         font-size: 1em;
@@ -210,30 +211,30 @@
         <input class="box__file" type="file" name="files[]" id="file" accept="image/*,video/*,audio/*" data-multiple-caption="{count} files selected">
       </label>
       <span class="control__spacer"></span>
-      <a class="button pictos first" title="Restart video" id="restart">0</a>
-      <a class="button pictos" title="back a few seconds (←)" id="rew">8</a>
-      <a class="button pictos" title="play pause (space)" id="play">9</a>
-      <a class="button pictos last" title="forward a few seconds (→)" id="fwd">7</a>
+      <a href="#?" class="button pictos first" title="Restart video" id="restart">0</a>
+      <a href="#?" class="button pictos" title="back a few seconds (←)" id="rew">8</a>
+      <a href="#?" class="button pictos" title="play pause (space)" id="play">9</a>
+      <a href="#?" class="button pictos last" title="forward a few seconds (→)" id="fwd">7</a>
       <span class="control__spacer"></span>
 
-      <a class="button pictos first" id="normal" title="reset speed (r)">D</a>
-      <a class="button pictos" id="slower" title="slower (s)">-</a>
-      <a class="button pictos" id="faster" title="faster (d)">+</a>
+      <a href="#?" class="button pictos first" id="normal" title="reset speed (r)">D</a>
+      <a href="#?" class="button pictos" id="slower" title="slower (s)">-</a>
+      <a href="#?" class="button pictos" id="faster" title="faster (d)">+</a>
       <input class="flex1 last" type="text" id="playbackrate" disabled="disabled" value="1x"></input>
       <span class="control__spacer"></span>
 
-      <a class="button pictos first" id="mute" title="mute"><</a>
-      <a class="button pictos mute" style="font-size:.8em;line-height:2" id="volDn" title="volume down">></a>
-      <a class="button pictos last" id="volUp" title="volume up">></a>
+      <a href="#?" class="button pictos first" id="mute" title="mute"><</a>
+      <a href="#?" class="button pictos mute" style="font-size:.8em;line-height:2" id="volDn" title="volume down">></a>
+      <a href="#?" class="button pictos last" id="volUp" title="volume up">></a>
       <span class="control__spacer"></span>
 
       <input type="text" class="first" id="videoFile" style="color:#0f0;" value="file:///Users/arleym/Google%20Drive/Learn/React%20For%20Beginners/01%20-%20Introduction,%20Tooling%20and%20Editor%20Setup.mp4">
-      <a class="button pictos last" id="loadVideo" title="load video by file path" autofocus style="margin-left:0">s</a>
+      <a href="#?" class="button pictos last" id="loadVideo" title="load video by file path" autofocus style="margin-left:0">s</a>
       <span class="control__spacer"></span>
 
-      <a class="button pictos first" id="list">n</a>
-      <!-- <a class="button pictos" id="hidecontrols">.</a> -->
-      <a class="button pictos last" id="hidecontrols">*</a>
+      <a href="#?" class="button pictos first" id="list">n</a>
+      <!-- <a href="#?" class="button pictos" id="hidecontrols">.</a> -->
+      <a href="#?" class="button pictos last" id="hidecontrols">*</a>
     </div>
   </div>
 
@@ -431,25 +432,12 @@
     c.init();r.Mousetrap=c;"undefined"!==typeof module&&module.exports&&(module.exports=c);"function"===typeof define&&define.amd&&define(function(){return c})}})("undefined"!==typeof window?window:null,"undefined"!==typeof window?document:null);
 
     // speed controls
-    Mousetrap.bind('d', function() {
-      $('#faster').click();
-      console.log('faster');
-    });
-    Mousetrap.bind('s', function() {
-      $('#slower').click();
-      console.log('slower');
-    });
-    Mousetrap.bind('r', function() {
-      $('#normal').click();
-      console.log('normal');
-    });
-    Mousetrap.bind('right', function() {
-      $('#fwd').click();
-    });
-    Mousetrap.bind('left', function() {
-      $('#rew').click();
-      console.log('normal');
-    });
+    Mousetrap.bind('d', function() { document.querySelector('#faster').click(); });
+    Mousetrap.bind('s', function() { document.querySelector('#slower').click(); });
+    Mousetrap.bind('r', function() { document.querySelector('#normal').click(); });
+    // video skips
+    Mousetrap.bind('right', function() { document.querySelector('#fwd').click(); });
+    Mousetrap.bind('left', function() { document.querySelector('#rew').click(); });
     // hide tools
     Mousetrap.bind('esc', function() { $('#w-controls').toggleClass('hide'); });
     // play pause
@@ -471,22 +459,18 @@
 -->
 
 <!--
-- Some keyboard shortcuts not working?!
 - drag area populates path thing
 - Convert font to SVG
 - make this whole tool a state that appears on drag - draggy mcgee change triggers body class to make player visible.
 - start video by URL query string
 - Index listy area!
   - use terminal to list a bunch of file names, have a link of files that open in media player...
-- Add button title tags
 - fade out at time
 - Line by line JS
   - remove error
   - remove volume
   - another level for play pause?
 - Keyboard shortcuts
-  - Controls
   - Jump percentages like YT
-  - arrows to ffwd / rwd like yt
-- Allow a case for YouTube, Vimeo
+  - shift arrows to jump 10s
 -->
