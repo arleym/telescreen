@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>🎬</title>
+  <title>Telescreen</title>
   <link href="data:image/vndmicrosofticon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAD///8A////AP///wD///8A////ANbz5jFc0p7JpebJbvX8+Qr///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AMnw30E8yorwMceE/zHHhP8/yozrt+vUV////wD///8A////AP///wD///8A////AP///wD///8A////ALrs1lQ3yIf3MceE/zHHhP8xx4T/MceE/4vfuo7///8A////AP3+/gD///8A////AP///wD///8A////AKrozGcyx4T8MceE/zHHhP8xx4T/MceE/zHHhP+L37qO////APD79hFh1KHCbdentcvw4D////8A////AJjjwX4xx4T9MceE/zHHhP8xx4T/MceE/zHHhP8xx4T/i9+6juj48RpU0JnTMceE/zHHhP8xx4T/YdShwoXdtpQxx4T/MceE/zHHhP8xx4T/MceE/zrJif0xx4T/MceE/23Xp7RJzZLeMceE/zHHhP8xx4T/MceE/zzKivAxx4T/MceE/zHHhP8xx4T/MceE/37bsf34/fv9t+vU/VnSnP0xx4T/MceE/zHHhP8xx4T/MceE/zHHhP88yorwMceE/zHHhP8xx4T/MceE/47gu/39/v79///////////7/vz9YdSh+DHHhP8xx4T/MceE/zHHhP8xx4T/PMqK8DHHhP8xx4T/MseE/aDlxv3+/v79///////////3/fr8cNip9zHHhP8xx4T/MceE/0PMj/03yIf9MceE/zzKivAxx4T/NMeG/bLq0f3/////////////////////rOjN+DbIh/0xx4T/MceE/1XRmf3q+fL96/nz/ZLhvv1JzJLwOcmI/cLu2v3////////////////q+fL62PTn9v////3r+fP9leK//W/XqP3y+/f9////////////////9vz5lM/y4tv////////////////5/fv8WtKc+DHHhP1o1qT2x+/e9v7+/vr////9///////////////9////f////wD///8B/v7+U////8f+/v79//////b8+f2m58r9TM6U/X/csv38/v39///////////////8////av///wD///8A////AP///wD///8A////PP///7H////9//////z+/f39/v79///////////////4////Vf///wD///8A////AP///wD///8A////AP///wD///8A////Jv///5r////2///////////////w/v7+Qv///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////F////4P////W////Mv///wD///8A////AP///wD///8A/f8AAPh/AADwPwAA4DMAAMAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAwAcAAPAPAAD8HwAA/z8AAA==" rel="shortcut icon">
 <!--
 
@@ -31,7 +31,6 @@
       display: flex;
     }
     @font-face {
-      /* http://pictos.cc/classic/font */
       font-family: "pictos";
       src: url("pictos-web.woff");
     }
@@ -40,26 +39,25 @@
     .mute { opacity: 0.8; }
     .last { border-radius: 0 var(--rad) var(--rad) 0; }
     .first { border-radius: var(--rad) 0 0 var(--rad); }
+    .first.last { border-radius: var(--rad); }
     .flex1 { flex: 1; }
+    .w-video { width: 100%; }
     video {
       max-width: 100%;
       height: 100vh;
       margin: auto;
+      display: block;
       z-index: 1;
     }
       video::-webkit-media-controls-panel { background-color: #2f3437; color: white;}
-      video::-webkit-media-controls-volume-slider-container { background-color: var(--accent); }
-      video::-webkit-media-controls-volume-slider { background-color: var(--accent); }
-      video::-webkit-media-controls-timeline { background-color: var(--accent); }
     .w-controls {
       position: fixed;
       z-index: 2;
       width: 100%;
       bottom: 0;
-      padding: 10px;
-      background-image: url(noise.png); /* http://codepen.io/wallas/pen/lFABr */
+      padding: 6px;
+      background-image: url(noise.png);
       background-color: #2f3437;
-      /*height: 6vh;*/
     }
     .controls {
       display: flex;
@@ -67,17 +65,16 @@
       position: relative;
     }
       .button {
-        /* http://codepen.io/LukyVj/pen/EIFlv?editors=1100#0 */
         position: relative;
         text-decoration: none;
         background-image: linear-gradient(#485258, #30383c);
         color: #eceff1;
-        font-size: 1em;
+        font-size: 0.9em;
         flex: 2;
-        line-height: 1.2;
+        line-height: 1;
         text-align: center;
         cursor: pointer;
-        height: 36px;
+        height: 26px;
         user-select: none;
       }
         .button:not(.active) {
@@ -145,13 +142,13 @@
         cursor: cell;
       }
         .draggy-mcgee::before {
-          content: "Drag media here";
+          content: "Load Media…";
           font-family: Joystix, monospace;
           display: inline-block;
           font-size: 10px;
           color: var(--accent);
           padding-left: 2em;;
-          padding-top: 10px;
+          padding-top: 7px;
           cursor: cell;
         }
         .draggy-mcgee:drop {
@@ -166,6 +163,7 @@
         top: 0;
         left: 0;
       }
+      [type="number"],
       [type="text"] {
         background-color: #1f2325;
         font-family: Joystix, monospace;
@@ -201,9 +199,11 @@
   |__/  |__/   |__/   |__/     |__/|________/
 
 -->
-  <div id="errorMsg" style="color:red;"></div>
+  <div id="errorMsg" style="color:firebrick;"></div>
 
-  <video id="videoplayer" controls poster="media.jpg"></video>
+  <div class="w-video">
+    <video id="videoplayer" controls></video>
+  </div>
 
   <div id="w-controls" class="w-controls">
     <div id="buttonbar" class="controls">
@@ -211,8 +211,7 @@
         <input class="box__file" type="file" name="files[]" id="file" accept="image/*,video/*,audio/*" data-multiple-caption="{count} files selected">
       </label>
       <span class="control__spacer"></span>
-      <a href="#?" class="button pictos first" title="Restart video" id="restart">0</a>
-      <a href="#?" class="button pictos" title="back a few seconds (←)" id="rew">8</a>
+      <a href="#?" class="button pictos first" title="back a few seconds (←)" id="rew">8</a>
       <a href="#?" class="button pictos" title="play pause (space)" id="play">9</a>
       <a href="#?" class="button pictos last" title="forward a few seconds (→)" id="fwd">7</a>
       <span class="control__spacer"></span>
@@ -220,21 +219,10 @@
       <a href="#?" class="button pictos first" id="normal" title="reset speed (r)">D</a>
       <a href="#?" class="button pictos" id="slower" title="slower (s)">-</a>
       <a href="#?" class="button pictos" id="faster" title="faster (d)">+</a>
-      <input class="flex1 last" type="text" id="playbackrate" disabled="disabled" value="1x"></input>
+      <input class="flex1 last" type="number" id="playbackrate" value="1" step="0.1"></input>
       <span class="control__spacer"></span>
 
-      <a href="#?" class="button pictos first" id="mute" title="mute"><</a>
-      <a href="#?" class="button pictos mute" style="font-size:.8em;line-height:2" id="volDn" title="volume down">></a>
-      <a href="#?" class="button pictos last" id="volUp" title="volume up">></a>
-      <span class="control__spacer"></span>
-
-      <input type="text" class="first" id="videoFile" style="color:#0f0;" value="file:///Users/arleym/Google%20Drive/Learn/React%20For%20Beginners/01%20-%20Introduction,%20Tooling%20and%20Editor%20Setup.mp4">
-      <a href="#?" class="button pictos last" id="loadVideo" title="load video by file path" autofocus style="margin-left:0">s</a>
-      <span class="control__spacer"></span>
-
-      <a href="#?" class="button pictos first" id="list">n</a>
-      <!-- <a href="#?" class="button pictos" id="hidecontrols">.</a> -->
-      <a href="#?" class="button pictos last" id="hidecontrols">*</a>
+      <a href="#?" class="button pictos first last" id="hidecontrols">*</a>
     </div>
   </div>
 
@@ -316,12 +304,8 @@
       function setTime(tValue) {
       //  if no video is loaded, this throws an exception
       try {
-          if (tValue == 0) {
-              video.currentTime = tValue;
-          }
-          else {
-              video.currentTime += tValue;
-          }
+          if (tValue == 0) { video.currentTime = tValue; }
+          else { video.currentTime += tValue; }
 
         } catch (err) {
           errMessage("Video content might not be loaded");
@@ -349,17 +333,11 @@
       //  Play
       document.getElementById("play").addEventListener("click", vidplay, false);
       //  Restart
-      document.getElementById("restart").addEventListener("click", function () {
-          setTime(0);
-      }, false);
+      document.getElementById("restart").addEventListener("click", function () { setTime(0); }, false);
       //  Skip backward
-      document.getElementById("rew").addEventListener("click", function () {
-          setTime(-5);
-      }, false);
+      document.getElementById("rew").addEventListener("click", function () { setTime(-5); }, false);
       //  Skip forward
-      document.getElementById("fwd").addEventListener("click", function () {
-          setTime(5);
-      }, false);
+      document.getElementById("fwd").addEventListener("click", function () { setTime(5); }, false);
       //  set src == latest video file URL
       document.getElementById("loadVideo").addEventListener("click", getVideo, false);
 
@@ -376,18 +354,64 @@
           }, false);
 
           // playback speed buttons
+          function playbackrateUpdater() {
+            document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
+          }
           document.getElementById("slower").addEventListener("click", function () {
               video.playbackRate -= 0.1;
-              document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
+              playbackrateUpdater();
           }, false);
           document.getElementById("faster").addEventListener("click", function () {
               video.playbackRate += 0.1;
-              document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
+              playbackrateUpdater();
           }, false);
           document.getElementById("normal").addEventListener("click", function () {
               video.playbackRate = 1;
-              document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
+              playbackrateUpdater();
           }, false);
+          Mousetrap.bind('shift+1', function() {
+            video.playbackRate = 1;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+2', function() {
+            video.playbackRate = 2;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+3', function() {
+            video.playbackRate = 3;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+4', function() {
+            video.playbackRate = 4;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+5', function() {
+            video.playbackRate = 5;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+6', function() {
+            video.playbackRate = 6;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+7', function() {
+            video.playbackRate = 7;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+8', function() {
+            video.playbackRate = 8;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+9', function() {
+            video.playbackRate = 9;
+            playbackrateUpdater();
+          });
+          Mousetrap.bind('shift+0', function() {
+            video.playbackRate = 16;
+            playbackrateUpdater();
+          });
+          $( "#playbackrate" ).bind('input', function(){
+            video.playbackRate = $(this).val();
+          });
           document.getElementById("mute").addEventListener("click", function (evt) {
               if (video.muted) {
                   video.muted = false;
@@ -410,13 +434,9 @@
 
     $(function() {
       // space pause
-      $('#videoplayer').click(function(){
-        this[this.paused ? 'play' : 'pause']();
-      });
+      $('#videoplayer').click(function(){ this[this.paused ? 'play' : 'pause'](); });
       // control hide clicker
-      $('#hidecontrols').click(function(){
-        $('#w-controls').toggleClass('hide');
-      });
+      $('#hidecontrols').click(function(){ $('#w-controls').toggleClass('hide'); });
 
     }); // onload
 
@@ -431,7 +451,7 @@
     escape:"esc",plus:"+",mod:/Mac|iPod|iPhone|iPad/.test(navigator.platform)?"meta":"ctrl"},n;for(g=1;20>g;++g)k[111+g]="f"+g;for(g=0;9>=g;++g)k[g+96]=g;c.prototype.bind=function(a,b,c){a=a instanceof Array?a:[a];this._bindMultiple.call(this,a,b,c);return this};c.prototype.unbind=function(a,b){return this.bind.call(this,a,function(){},b)};c.prototype.trigger=function(a,b){if(this._directMap[a+":"+b])this._directMap[a+":"+b]({},a);return this};c.prototype.reset=function(){this._callbacks={};this._directMap=
     {};return this};c.prototype.stopCallback=function(a,b){return-1<(" "+b.className+" ").indexOf(" mousetrap ")||C(b,this.target)?!1:"INPUT"==b.tagName||"SELECT"==b.tagName||"TEXTAREA"==b.tagName||b.isContentEditable};c.prototype.handleKey=function(){return this._handleKey.apply(this,arguments)};c.addKeycodes=function(a){for(var b in a)a.hasOwnProperty(b)&&(k[b]=a[b]);n=null};c.init=function(){var a=c(t),b;for(b in a)"_"!==b.charAt(0)&&(c[b]=function(b){return function(){return a[b].apply(a,arguments)}}(b))};
     c.init();r.Mousetrap=c;"undefined"!==typeof module&&module.exports&&(module.exports=c);"function"===typeof define&&define.amd&&define(function(){return c})}})("undefined"!==typeof window?window:null,"undefined"!==typeof window?document:null);
-
+    // used above for speed controls too
     // speed controls
     Mousetrap.bind('d', function() { document.querySelector('#faster').click(); });
     Mousetrap.bind('s', function() { document.querySelector('#slower').click(); });
@@ -460,19 +480,18 @@
 -->
 
 <!--
-- drag area as whole video? (prevent default of opening file)
-  - if dragging happens when tool bar is hidden, show it
-- remember the speed of last played
+
+- remember the speed of last played https://codepen.io/ArleyM/pen/EEmKEa
 - SVG system from Icomoon
 - make this whole tool a state that appears on drag - draggy mcgee change triggers body class to make player visible.
-- start video by URL query string - https://www.sitepoint.com/url-parameters-jquery/
+- start video by URL query string - https://www.sitepoint.com/url-parameters-jquery/ - for Alfred workflow
 - fade out at time; for worship music
 - Line by line JS
   - remove error
   - remove volume
   - another level for play pause?
 - Keyboard shortcuts
-  - Jump percentages like YT
-  - shift arrows to jump 10s
+  - Jump percentages like YT w numbers
+  - shift arrows to jump 30s
 
 -->
