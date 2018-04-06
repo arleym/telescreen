@@ -356,6 +356,7 @@
           // playback speed buttons
           function playbackrateUpdater() {
             document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
+            console.log("hey");
           }
           document.getElementById("slower").addEventListener("click", function () {
               video.playbackRate -= 0.1;
@@ -493,5 +494,5 @@
 - Keyboard shortcuts
   - Jump percentages like YT w numbers
   - shift arrows to jump 30s
-
+- ? help - panel to list shortcuts
 -->
