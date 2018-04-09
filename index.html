@@ -201,9 +201,7 @@
 -->
   <div id="errorMsg" style="color:firebrick;"></div>
 
-  <div class="w-video">
-    <video id="videoplayer" controls></video>
-  </div>
+  <video id="videoplayer" controls></video>
 
   <div id="w-controls" class="w-controls">
     <div id="buttonbar" class="controls">
@@ -221,6 +219,10 @@
       <a href="#?" class="button pictos" id="faster" title="faster (d)">+</a>
       <input class="flex1 last" type="number" id="playbackrate" value="1" step="0.1"></input>
       <span class="control__spacer"></span>
+
+      <!-- <input type="text" class="first" id="videoFile" style="color:#0f0;" value="file:///Users/arleym/Google%20Drive/Learn/React%20For%20Beginners/01%20-%20Introduction,%20Tooling%20and%20Editor%20Setup.mp4">
+      <a href="#?" class="button pictos last" id="loadVideo" title="load video by file path" autofocus style="margin-left:0">s</a>
+      <span class="control__spacer"></span> -->
 
       <a href="#?" class="button pictos first last" id="hidecontrols">*</a>
     </div>
@@ -332,31 +334,21 @@
       //  button events
       //  Play
       document.getElementById("play").addEventListener("click", vidplay, false);
-      //  Restart
-      document.getElementById("restart").addEventListener("click", function () { setTime(0); }, false);
       //  Skip backward
       document.getElementById("rew").addEventListener("click", function () { setTime(-5); }, false);
       //  Skip forward
       document.getElementById("fwd").addEventListener("click", function () { setTime(5); }, false);
       //  set src == latest video file URL
-      document.getElementById("loadVideo").addEventListener("click", getVideo, false);
+      // document.getElementById("loadVideo").addEventListener("click", getVideo, false);
 
           // fail with message
           video.addEventListener("error", function (err) {
               errMessage(err);
           }, true);
-          // volume buttons
-          document.getElementById("volDn").addEventListener("click", function () {
-              setVol(-.1); // down by 10%
-          }, false);
-          document.getElementById("volUp").addEventListener("click", function () {
-              setVol(.1);  // up by 10%
-          }, false);
 
           // playback speed buttons
           function playbackrateUpdater() {
             document.getElementById('playbackrate').value = Math.round(video.playbackRate * 100) / 100;
-            console.log("hey");
           }
           document.getElementById("slower").addEventListener("click", function () {
               video.playbackRate -= 0.1;
@@ -413,24 +405,17 @@
           $( "#playbackrate" ).bind('input', function(){
             video.playbackRate = $(this).val();
           });
-          document.getElementById("mute").addEventListener("click", function (evt) {
-              if (video.muted) {
-                  video.muted = false;
-                  evt.target.innerHTML = "🔈"
-              } else {
-                  video.muted = true;
-                  evt.target.innerHTML = "<"
-              }
-          }, false);
+
 
       // remember the last entered video
-      var lastMedia = document.getElementById('videoFile');
-      if( localStorage.last ){
-          lastMedia.value = localStorage.last;
-      }
-      lastMedia.addEventListener('blur', function(){
-          localStorage.last = lastMedia.value;
-      }, false);
+      // var lastMedia = document.getElementById('videoFile');
+      // if( localStorage.last ){
+      //     lastMedia.value = localStorage.last;
+      // }
+      // lastMedia.addEventListener('blur', function(){
+      //     localStorage.last = lastMedia.value;
+      // }, false);
+
     }// end of video player
 
     $(function() {
