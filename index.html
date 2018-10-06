@@ -183,6 +183,8 @@
       .icon-inline-ctrl {
         line-height: 2.5;
       }
+      .play-state [id="icon-pause"] { display: none; }
+      :not(.play-state) > [id="icon-play"] { display: none; }
   </style>
 </head>
 <body onload="init();">
@@ -211,11 +213,14 @@
       <a href="#?" class="button icon-inline-ctrl icon-white first" title="back a few seconds (←)" id="rew">
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 48 48"><path d="M22 36V12L5 24l17 12zm1-12l17 12V12L23 24z"/></svg>
       </a>
-      <a href="#?" class="button icon-inline-ctrl icon-white" title="play pause (space)" id="play">
-        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 48 48">
+      <a href="#?" class="button icon-inline-ctrl icon-white play-state" title="play pause (space)" id="play">
+        <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 48 48">
           <path d="M-838-2232H562v3600H-838z" fill="none"/>
           <path d="M16 10v28l22-14z"/>
           <path d="M0 0h48v48H0z" fill="none"/>
+        </svg>
+        <svg id="icon-pause" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 48 48">
+          <path d="M12 38h8V10h-8v28zm16-28v28h8V10h-8z"/>
         </svg>
       </a>
       <a href="#?" class="button icon-inline-ctrl icon-white last" title="forward a few seconds (→)" id="fwd">
@@ -302,10 +307,8 @@
         button = evt.target; //  get the button id to swap the text based on the state
         if (video.paused) {   // play the file, and display pause symbol
           video.play();
-          button.textContent = "5";
         } else { // pause the file, and display play symbol
           video.pause();
-          button.textContent = "4";
         }
       }
       //  load video file from input field
@@ -439,10 +442,13 @@
 
     $(function() {
       // space pause
-      $('#videoplayer').click(function(){ this[this.paused ? 'play' : 'pause'](); });
+      $('#videoplayer').click(function(){
+        this[this.paused ? 'play' : 'pause']();
+        $('#play').toggleClass('play-state');
+      });
       // control hide clicker
       $('#hidecontrols').click(function(){ $('#w-controls').toggleClass('hide'); });
-
+      $('#play').click(function(){ $('#play').toggleClass('play-state'); });
     }); // onload
 
      /* mousetrap v1.6.0 craig.is/killing/mice */
