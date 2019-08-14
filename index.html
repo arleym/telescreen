@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +44,7 @@
       margin: auto;
       display: block;
       z-index: 1;
+      outline: 0;
     }
       video::-webkit-media-controls-panel { color: white; }
     .w-controls {
@@ -202,7 +204,7 @@
 -->
   <div id="errorMsg" style="color:firebrick;"></div>
 
-  <video id="videoplayer" controls></video>
+  <video id="videoplayer" controls autoplay></video>
 
   <div id="w-controls" class="w-controls">
     <div id="buttonbar" class="controls">
@@ -279,6 +281,7 @@
         var file = this.files[0]
         var type = file.type
         var videoNode = document.querySelector('video')
+        videoNode.click();
         var canPlay = videoNode.canPlayType(type)
         if (canPlay === '') canPlay = 'no'
         var message = 'Can play type "' + type + '": ' + canPlay
@@ -318,7 +321,7 @@
               video.src = fileURL;
               video.load();  // if HTML source element is used
               document.getElementById("play").click();  // start play
-              video.focus();
+              $('#videoplayer').click();
           } else {
               errMessage("Enter a valid video URL");  // fail silently
           }
@@ -441,11 +444,11 @@
     }// end of video player
 
     $(function() {
-      // space pause
-      $('#videoplayer').click(function(){
-        this[this.paused ? 'play' : 'pause']();
-        $('#play').toggleClass('play-state');
-      });
+      // clicking the video to pause - Chrome added this function
+      // $('#videoplayer').click(function(){
+      //   this[this.paused ? 'play' : 'pause']();
+      //   $('#play').toggleClass('play-state');
+      // });
       // control hide clicker
       $('#hidecontrols').click(function(){ $('#w-controls').toggleClass('hide'); });
       $('#play').click(function(){ $('#play').toggleClass('play-state'); });
@@ -473,7 +476,8 @@
     // hide tools
     Mousetrap.bind('esc', function() { $('#w-controls').toggleClass('hide'); });
     // play pause
-    Mousetrap.bind('space', function() { $('#videoplayer').get(0).paused?$('#videoplayer').get(0).play() :$('#videoplayer').get(0).pause(); });
+    // Mousetrap.bind('space', function() { $('#videoplayer').get(0).paused?$('#videoplayer').get(0).play() :$('#videoplayer').get(0).pause(); });
+    Mousetrap.bind('space', function() { $('#play').click(); });
   </script>
 </body>
 </html>
